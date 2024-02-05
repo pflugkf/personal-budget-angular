@@ -183,7 +183,7 @@
         }
 
         function getBudget() {
-            axios.get(/* 'http://localhost:3000/budget' */'/budget')
+            axios.get('http://localhost:3000/budget'/* '/budget' */)
                 .then(function (res) {
                     for (var i = 0; i < res.data.myBudget.length; i++) {
                         dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
@@ -216,7 +216,8 @@
             radius = Math.min(width, height) / 2;
 
 
-        d3.json("/budget", function (data) {
+        d3.json("http://localhost:3000/budget", function (data) {
+            //console.log(data);
             var budgetArray = data.myBudget;
 
             const backgroundColors = ["#ffcd56", "#ff6384", "#36a2eb", "#fd6b19", "#99ff66", "#cc33ff", "#b3b3b3"];

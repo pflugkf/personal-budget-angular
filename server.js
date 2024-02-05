@@ -24,9 +24,13 @@ app.use(cors());
     ]
 }; */
 
-app.use('/', express.static('public'));
+//app.use('/', express.static('public'));
 
-app.get('/hello', (req, res) => {
+/* app.get('/hello', (req, res) => {
+    res.send('Hello World!');
+}); */
+
+app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
