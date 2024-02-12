@@ -47,6 +47,7 @@ export class HomepageComponent implements OnInit {
 
   createChart() {
     const ctx = this.elementRef.nativeElement.querySelector(`#myChart`);
+
     const myPieChart = new Chart(ctx, {
         type: 'pie',
         data: this.dataSource
