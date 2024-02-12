@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild, Renderer2 } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import * as d3 from 'd3';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'pb-d3pie',
@@ -10,7 +11,7 @@ export class D3pieComponent implements OnInit {
   @ViewChild('pieChart', { static: true })
   chartRef!: ElementRef;
 
-  constructor(private elementRef: ElementRef, private renderer2: Renderer2) {
+  constructor(private elementRef: ElementRef, public dataService: DataService) {
 
   }
 
@@ -45,10 +46,17 @@ export class D3pieComponent implements OnInit {
 
     d3.json('http://localhost:3000/budget').then((data: any) => {
 
-      const budgetArray = data.myBudget;
-      for (let i = 0; i < budgetArray.length; i++) {
+      //const budgetArray = data.myBudget;
+      this.dataService.budgetData = data.myBudget;
+
+      /* for (let i = 0; i < budgetArray.length; i++) {
         this.labels.push(budgetArray[i].title);
         this.values.push(budgetArray[i].budget);
+      } */
+
+      for (let i = 0; i < this.dataService.budgetData.length; i++) {
+        this.labels.push(this.dataService.budgetData[i].title);
+        this.values.push(this.dataService.budgetData[i].budget);
       }
 
       var pie = d3.pie()
@@ -204,7 +212,8 @@ export class D3pieComponent implements OnInit {
         polyline.exit().remove();
       };
 
-      change(budgetArray);
+      //change(budgetArray);
+      change(this.dataService.budgetData);
     });
 
   }
